@@ -2,7 +2,7 @@ pipeline {
     agent any
      environment {
             MAVEN_HOME = "C:\\program files\\maven"
-            PATH = "{env.PATH};${env.MAVEN_HOME}\\bin"
+            PATH = "${env.PATH};${env.MAVEN_HOME}\\bin"
             // Define Docker Hub credentials ID
             DOCKERHUB_CREDENTIALS_ID = 'Docker_Hub'
             // Define Docker Hub repository name
