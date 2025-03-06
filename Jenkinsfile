@@ -52,10 +52,11 @@ pipeline {
                 }
                 stage('Push Docker Image to Docker Hub') {
                     steps {
-                        // Push Docker image to Docker Hub
                         script {
-                            bat "docker login -u ${DOCKERHUB_CREDENTIALS_ID} -p ${DOCKERHUB_CREDENTIALS_PASSWORD}"
-                            bat "docker push ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}"
+                            withCredentials([usernamePassword(credentialsId: 'Docker_Hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                                bat "echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin"
+                                bat "docker push ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}"
+                            }
                         }
                     }
                 }
