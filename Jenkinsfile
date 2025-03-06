@@ -47,16 +47,15 @@ pipeline {
                         // Build Docker image
                         script {
                             bat "docker build -t ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG} ."
-                            }
+                        }
                     }
                 }
                 stage('Push Docker Image to Docker Hub') {
                     steps {
                         // Push Docker image to Docker Hub
                         script {
-                                    bat "docker login -u ${DOCKERHUB_CREDENTIALS_ID} -p ${DOCKERHUB_CREDENTIALS_PASSWORD}"
-                                    bat "docker push ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}"
-                                }
+                            bat "docker login -u ${DOCKERHUB_CREDENTIALS_ID} -p ${DOCKERHUB_CREDENTIALS_PASSWORD}"
+                            bat "docker push ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}"
                         }
                     }
                 }
